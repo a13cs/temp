@@ -9,44 +9,49 @@ import java.util.List;
 
 
 //@Builder
-@Getter
-@Setter
+//@Getter
+//@Setter
 @ToString
 @Entity
-@IdClass(LocationId.class)
 public class Place {
 
-    @Id private String city;
-    @Id private String region;
-    @Id private String country;
+//    @Id private String city;
+//    @Id private String region;
+//    @Id private String country;
+    @EmbeddedId
+    private LocationId id = new LocationId();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Sport> sports;
 
     public Place() { }
 
+    public LocationId getId() {
+        return id;
+    }
+
     public String getCity() {
-        return city;
+        return id.getCity();
     }
 
     public void setCity(String city) {
-        this.city = city;
+        this.id.setCity(city);
     }
 
     public String getRegion() {
-        return region;
+        return id.getRegion();
     }
 
     public void setRegion(String region) {
-        this.region = region;
+        this.id.setRegion(region);
     }
 
     public String getCountry() {
-        return country;
+        return id.getCountry();
     }
 
     public void setCountry(String country) {
-        this.country = country;
+        this.id.setCountry(country);
     }
 
     public List<Sport> getSports() {

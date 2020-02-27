@@ -25,8 +25,10 @@ public class Sport {
     private Date startDate;
     private Date endDate;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Place place;
+//    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    private Place place;
+
+    private LocationId locationId;
 
     public Sport() {
     }

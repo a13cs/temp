@@ -31,15 +31,17 @@ public class SearchServiceImpl implements SearchService {
         LocalDate start = LocalDate.parse(request.getPeriodStart(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         LocalDate end   = LocalDate.parse(request.getPeriodEnd(),   DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         Period period   = start.until(end);
+/*
+        LOGGER.info("Sport entities:");
+        List<Sport> sports1 = sportsRepository.findByNameInAndStartDateLessThan(sportNames, Date.valueOf(start));
+        sports1.stream().map(Objects::toString).forEach(LOGGER::info);
+        LOGGER.info("Sports Model:");
+        List<SearchResponse> responseList = SearchMapper.mapSportsToModel(sportsRepository.findByNameInAndStartDateLessThan(sportNames, Date.valueOf(start)), period.getDays());
+        responseList.stream().map(Objects::toString).forEach(LOGGER::info);
+*/
 
-        LOGGER.info("findByNameInAndStartDateGreaterThan:");
-        sportsRepository.findByNameInAndStartDateLessThan(sportNames, Date.valueOf(start)).stream().map(Objects::toString).forEach(LOGGER::info);
-        LOGGER.info("mapSportsToModel:");
-        SearchMapper.mapSportsToModel(sportsRepository.findByNameInAndStartDateLessThan(sportNames, Date.valueOf(start)), period.getDays()).stream().map(Objects::toString).forEach(LOGGER::info);
-
-
-        List<Sport> sports = sportsRepository.queryBySportAndPeriod(sportNames, Date.valueOf(start), Date.valueOf(end));
-        SearchMapper.mapSportsToModel(sports, period.getDays()).stream().map(Objects::toString).forEach(LOGGER::info);
+        List<Sport> sports = sportsRepository.getBySportAndPeriod(sportNames, Date.valueOf(start), Date.valueOf(end));
+        sports.stream().map(Objects::toString).forEach(LOGGER::info);
         return SearchMapper.mapSportsToModel(sports, period.getDays());
     }
 }

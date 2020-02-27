@@ -62,7 +62,7 @@ public final class PlacesMapper {
             LOGGER.warn(String.format("Could not parse %s as startDate and %s as endDate. %s",startDate, endDate, pex.getMessage()));
 //            throw new RuntimeException()
         }
-//        sport.setPlace(place);
+        sport.setLocationId(place.getId());
         return sport;
     }
 

@@ -10,10 +10,10 @@ import java.util.List;
 
 public interface SportsRepository extends JpaRepository<Sport, Long> {
 
-    @Query("select s from Sport s where name in :sports and startDate> :start and endDate< :end")
-    List<Sport> queryBySportAndPeriod(@Param("sports") List<String> sportNames,
-                                      @Param("start") Date startDate,
-                                      @Param("end") Date endDate);
+    @Query("select s from Sport s where name in :sports and startDate<= :start and endDate>= :end")
+    List<Sport> getBySportAndPeriod(@Param("sports") List<String> sportNames,
+                                    @Param("start")  Date startDate,
+                                    @Param("end")    Date endDate);
 
     List<Sport> findByNameInAndStartDateLessThan(List<String> sportNames, Date start);
 

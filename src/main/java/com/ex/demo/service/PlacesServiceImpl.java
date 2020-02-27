@@ -1,5 +1,6 @@
 package com.ex.demo.service;
 
+import com.ex.demo.data.LocationId;
 import com.ex.demo.data.Place;
 import com.ex.demo.model.LocationDTO;
 import com.ex.demo.model.PlaceDTO;
@@ -41,14 +42,14 @@ public class PlacesServiceImpl implements PlacesService {
     @Override
     public PlaceDTO getPlace(LocationDTO location) {
         List<Place> places = placesRepository
-                .findByCityAndRegionAndCountry(location.getCity(), location.getRegion(), location.getCountry());
+                .findById(new LocationId(location.getCity(), location.getRegion(), location.getCountry()));
         return places.stream().map(PlacesMapper::mapEntityToDTO).findFirst().orElseGet(PlaceDTO::new);
     }
 
     @Override
     public boolean removePlace(LocationDTO location) {
         Optional<Place> place = placesRepository
-                .findByCityAndRegionAndCountry(location.getCity(), location.getRegion(), location.getCountry())
+                .findById(new LocationId(location.getCity(), location.getRegion(), location.getCountry()))
                 .stream()
                 .findFirst();
 
@@ -59,10 +60,10 @@ public class PlacesServiceImpl implements PlacesService {
     @Override
     public PlaceDTO updatePlace(PlaceDTO placeDTO) {
         Optional<Place> place = placesRepository
-                .findByCityAndRegionAndCountry(
+                .findById(new LocationId(
                         placeDTO.getLocation().getCity(),
                         placeDTO.getLocation().getRegion(),
-                        placeDTO.getLocation().getCountry())
+                        placeDTO.getLocation().getCountry()))
                 .stream()
                 .findFirst();
 

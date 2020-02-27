@@ -9,8 +9,7 @@ import lombok.ToString;
 @ToString
 public class SportResult {
 
-//    private String locationName;
-    private String sportName;  // SportResult
+    private String sportName;
     private Integer cost;
 
     public SportResult() {
