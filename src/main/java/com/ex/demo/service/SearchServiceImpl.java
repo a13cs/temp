@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.time.LocalDate;
-import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Objects;
 
@@ -30,18 +30,10 @@ public class SearchServiceImpl implements SearchService {
         List<String> sportNames = request.getSportNames();
         LocalDate start = LocalDate.parse(request.getPeriodStart(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         LocalDate end   = LocalDate.parse(request.getPeriodEnd(),   DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        Period period   = start.until(end);
-/*
-        LOGGER.info("Sport entities:");
-        List<Sport> sports1 = sportsRepository.findByNameInAndStartDateLessThan(sportNames, Date.valueOf(start));
-        sports1.stream().map(Objects::toString).forEach(LOGGER::info);
-        LOGGER.info("Sports Model:");
-        List<SearchResponse> responseList = SearchMapper.mapSportsToModel(sportsRepository.findByNameInAndStartDateLessThan(sportNames, Date.valueOf(start)), period.getDays());
-        responseList.stream().map(Objects::toString).forEach(LOGGER::info);
-*/
 
         List<Sport> sports = sportsRepository.getBySportAndPeriod(sportNames, Date.valueOf(start), Date.valueOf(end));
         sports.stream().map(Objects::toString).forEach(LOGGER::info);
-        return SearchMapper.mapSportsToModel(sports, period.getDays());
+
+        return SearchMapper.mapSportsToModel(sports, ChronoUnit.DAYS.between(start,end));
     }
 }

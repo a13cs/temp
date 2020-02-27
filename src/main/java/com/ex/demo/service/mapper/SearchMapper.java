@@ -18,7 +18,7 @@ public final class SearchMapper {
     private SearchMapper() {}
 
 
-    public static List<SearchResponse> mapSportsToModel(final List<Sport> sports, final Integer days) {
+    public static List<SearchResponse> mapSportsToModel(final List<Sport> sports, final long days) {
         final List<SearchResponse> responseList = new ArrayList<>();
         sports.stream()
                 .filter(Objects::nonNull)
@@ -36,10 +36,10 @@ public final class SearchMapper {
         return responseList;
     }
 
-    private static SportResult mapSportToSportResult(Sport sport, Integer days) {
+    private static SportResult mapSportToSportResult(Sport sport, final long days) {
         SportResult sportResult = new SportResult();
         sportResult.setSportName(sport.getName());
-        int cost = days * sport.getCost();
+        long cost = days * sport.getCost();
         sportResult.setCost(cost);
 
         return sportResult;
