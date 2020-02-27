@@ -11,9 +11,8 @@ import org.slf4j.LoggerFactory;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public final class PlacesMapper {
@@ -25,12 +24,12 @@ public final class PlacesMapper {
 
     public static Place mapDTOtoEntity(PlaceDTO placeDTO) {
         final Place place = new Place();
-        Set<Sport> sports = placeDTO.getSports()
+        List<Sport> sports = placeDTO.getSports()
                 .stream()
                 .filter(Objects::nonNull)
                 .map(s -> PlacesMapper.mapSportDTOtoEntity(s, place))
-                .collect(Collectors.toSet());
-        place.setSports(new ArrayList<>(sports));
+                .collect(Collectors.toList());
+        place.setSports(sports);
 
         place.setCity(placeDTO.getLocation().getCity());
         place.setRegion(placeDTO.getLocation().getRegion());

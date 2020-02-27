@@ -12,7 +12,4 @@ public class SportResult {
     private String sportName;
     private long cost;
 
-    public SportResult() {
-    }
-
 }

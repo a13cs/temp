@@ -30,7 +30,4 @@ public class Sport {
 
     private LocationId locationId;
 
-    public Sport() {
-    }
-
 }
