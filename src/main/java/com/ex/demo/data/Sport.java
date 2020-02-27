@@ -1,6 +1,9 @@
 package com.ex.demo.data;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
@@ -11,8 +14,11 @@ import java.util.Date;
 
 @Getter
 @Setter
-@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @ToString
+@Entity
 public class Sport {
 
     @Id
@@ -31,3 +37,4 @@ public class Sport {
     private LocationId locationId;
 
 }
+
