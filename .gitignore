@@ -4,9 +4,9 @@ target/
 !**/src/main/**
 !**/src/test/**
 
-### STS ###
-.apt_generated
-.classpath
+
+**/target/**
+
 .factorypath
 .project
 .settings
